@@ -2,13 +2,16 @@ import markdown
 from tkinter import *
 from tkinter import StringVar, ttk, filedialog
 
-#FUNCTIONS: 
+#GLOBAL VARIABLES: 
 
 fileInPath= ""
 fileOutPath= ""
 
+
+# FUNCTIONS
+
 ## Open file
-def browseFiles():
+def inputFile():
     filename_in = filedialog.askopenfilename(initialdir="./", title = "Select .md file",
                                             filetypes=(("Markdown files", "*.md"), ("all files", "*.*")))
 
@@ -21,6 +24,7 @@ def browseFiles():
 
     
     return 
+
 ## Output file
 def outputFile():
     filename_out = filedialog.asksaveasfile(initialdir="./", title="Select where to save file",
@@ -50,7 +54,7 @@ def convertFile(inFilename, outFilename):
 
 #WINDOW
 
-#Luodaan root ikkuna
+#Create root ikkuna
 root = Tk()
 root.title("Md to HTML")
 root.geometry('600x200')
@@ -82,13 +86,15 @@ outOpenedLabel= Label(root, text="")
 outOpenedLabel.grid(column=1, row=1, sticky=W)
 
 #Buttons:
-buttonBrowseFiles = Button(root,
+
+##BrowseFiles
+buttonInputFile = Button(root,
                             text="Browse Files",
-                            command=browseFiles,
+                            command=inputFile,
                             width=10,
                             height=1)
 
-buttonBrowseFiles.grid(column=2, row=0)
+buttonInputFile.grid(column=2, row=0)
 
 
 ## output file
