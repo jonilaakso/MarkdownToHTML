@@ -1,4 +1,3 @@
-from turtle import color
 import markdown
 from tkinter import *
 from tkinter import StringVar, ttk, filedialog
