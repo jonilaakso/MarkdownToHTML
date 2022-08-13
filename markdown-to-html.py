@@ -58,8 +58,14 @@ def convertFile(inFilename, outFilename):
         html = markdown.markdown(text)
         print(html)
 
-        with open(outFilename, 'w') as output_file:
-            output_file.write(html)
+        #Write the output file with add_skeleton produced html
+        with open(outFilename, 'w') as output_file: 
+            output = addSkeleton(html)
+
+            for item in output:
+                output_file.write("%s\n" % item)
+
+
         print("file converted!")
         statusLabel.configure(text="File Converted to HTML", fg="black")
         
@@ -68,15 +74,27 @@ def convertFile(inFilename, outFilename):
         fileOutPath = ""
         inOpenedLabel.configure(text="")
         outOpenedLabel.configure(text="")
+
         filePopup()
 
-#File convert popup
+##File convert popup
 
 def filePopup():
     global fileLocation
     mbox.showinfo(title="File convert Success!", message="You have converted file: " + fileLocation)
 
+## html template and css for the file.
+## Takes file lines as parameter
+def addSkeleton(contents):
+    global fileOutPath
 
+    fileTemplate = open("./templates/html-template.html", "r")
+    template = fileTemplate.readlines()
+    fileTemplate.close()
+
+    template.insert(11, contents)
+
+    return template
 
 #WINDOW
 
